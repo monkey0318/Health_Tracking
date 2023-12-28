@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,8 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="302dp"
 
-
-                />
+                app:srcCompat="@drawable/top_background1" />
 
             <TextView
                 android:id="@+id/textView"
@@ -44,7 +43,8 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-
+                android:background="@drawable/edittext_background"
+                android:drawableStart="@drawable/email"
                 android:drawablePadding="16dp"
                 android:ems="10"
                 android:hint="Email"
@@ -60,10 +60,11 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-
+                android:background="@drawable/edittext_background"
+                android:drawableStart="@drawable/password"
                 android:drawablePadding="16dp"
                 android:ems="10"
-                android:hint="Passoword"
+                android:hint="Password"
                 android:inputType="text|textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
@@ -71,12 +72,12 @@
 
             <ImageView
                 android:id="@+id/login_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="79dp"
                 android:layout_gravity="end"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                />
+                app:srcCompat="@drawable/btn_arraw1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -92,7 +93,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="55dp"
                     android:layout_weight="1"
-
+                    android:background="@drawable/btn_background"
+                    android:drawableEnd="@drawable/facebook"
                     android:drawablePadding="16dp"
                     android:padding="8dp"
                     android:text="Facebook"
@@ -106,7 +108,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="55dp"
                     android:layout_weight="1"
-
+                    android:background="@drawable/btn_background"
+                    android:drawableEnd="@drawable/google"
                     android:drawablePadding="16dp"
                     android:padding="8dp"
                     android:text="Google"
@@ -120,8 +123,7 @@
             <TextView
                 android:id="@+id/registerTextView"
                 android:text="Are you a new user? Register"
-                  android:layout_height="match_parent"
-                 android:layout_width="match_parent"/>
+                style="@style/small_login_register_text" />
 
         </LinearLayout>
     </ScrollView>

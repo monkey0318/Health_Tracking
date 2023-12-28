@@ -22,7 +22,7 @@
                 android:id="@+id/login_image"
                 android:layout_width="match_parent"
                 android:layout_height="302dp"
-
+                app:srcCompat="@drawable/top_background2"
               />
 
             <TextView
@@ -86,16 +86,18 @@
 
             <ImageView
                 android:id="@+id/register_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="89dp"
+                android:layout_height="79dp"
                 android:layout_gravity="end"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-             />
+                app:srcCompat="@drawable/btn_arrow2"
+
+                />
 
             <TextView
                 android:id="@+id/loginTextView"
-
+                style="@style/small_login_register_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Already have an account? Login" />
