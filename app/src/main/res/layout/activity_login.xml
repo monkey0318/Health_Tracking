@@ -21,8 +21,8 @@
             <ImageView
                 android:id="@+id/login_image"
                 android:layout_width="match_parent"
-                android:layout_height="302dp"
-
+                android:layout_height="373dp"
+                android:scaleType="fitXY"
                 app:srcCompat="@drawable/top_background1" />
 
             <TextView
@@ -91,7 +91,7 @@
                     android:id="@+id/facebook_button"
                     style="@android:style/Widget.Button.Small"
                     android:layout_width="wrap_content"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/btn_background"
                     android:drawableEnd="@drawable/facebook"
@@ -100,13 +100,14 @@
                     android:text="Facebook"
                     android:textColor="#3b608c"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginEnd="32dp"/>
 
                 <Button
-                    android:id="@+id/gmail_button"
+                    android:id="@+id/google_button"
                     style="@android:style/Widget.Button.Small"
                     android:layout_width="wrap_content"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/btn_background"
                     android:drawableEnd="@drawable/google"
@@ -115,8 +116,7 @@
                     android:text="Google"
                     android:textColor="#3b608c"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:layout_marginStart="16dp" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
