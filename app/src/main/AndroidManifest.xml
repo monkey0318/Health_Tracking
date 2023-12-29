@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Health_Tracking"
         tools:targetApi="31">
         <activity
+            android:name=".profile.UpdateProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".waterTracking.WaterTrackingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".nutritionTracking.NutritionTrackingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -23,11 +35,10 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-        </activity>
-        <activity android:name=".RegisterActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
