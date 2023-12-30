@@ -2,4 +2,6 @@
     <string name="app_name">Health_Tracking</string>
     <string name="btnRegister">REGISTER</string>
     <string name="btnLogin">LOG IN</string>
+
+
 </resources>

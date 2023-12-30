@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.health_tracking.nutritionTracking.NutritionTrackingActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +19,11 @@ class MainActivity : AppCompatActivity() {
 
         btnLogin = findViewById(R.id.btnLogin)
         btnRegister = findViewById(R.id.btnRegister)
+
+//        btnLogin.setOnClickListener {
+//            val intent = Intent(this, NutritionTrackingActivity::class.java)
+//            startActivity(intent)
+//        }
 
         btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)

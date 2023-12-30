@@ -13,11 +13,6 @@
         android:theme="@style/Theme.Health_Tracking"
         tools:targetApi="31">
         <activity
-            android:name=".activity_tracking"
-            android:exported="false"
-            android:label="@string/title_activity_tracking"
-            android:theme="@style/Theme.Health_Tracking" />
-        <activity
             android:name=".profile.UpdateProfileActivity"
             android:exported="false" />
         <activity

@@ -4,17 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8EEEC"
     tools:context=".nutritionTracking.NutritionTrackingActivity">
 
     <EditText
         android:id="@+id/fatInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:background="#FBF3F3"
+        android:backgroundTint="#F6F4F4"
         android:ems="10"
-        android:inputType="text"
-        android:text="Name"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:hint="Fat ( g : )"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carbInput" />
 
@@ -25,8 +30,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
-        android:text="TextView"
+        android:text="Fat ( g : )"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/fatInput"
+        app:layout_constraintHorizontal_bias="0.411"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carb_TV" />
 
@@ -35,34 +43,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
-        android:text="TextView"
+        android:text="Protein (g :)"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/proteinInput"
+        app:layout_constraintHorizontal_bias="0.677"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
         android:id="@+id/proteinInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="28dp"
+        android:background="#FBF3F3"
+        android:backgroundTint="#F6F4F4"
         android:ems="10"
-        android:inputType="text"
-        android:text="Name"
+        android:hint="protein ( g : )"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
         android:id="@+id/carbInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:textAlignment="center"
+        android:background="#FBF3F3"
+        android:backgroundTint="#F6F4F4"
         android:ems="10"
+        android:textColorHint="@color/black"
         android:inputType="text"
-        android:text="Name"
+        android:hint="Carb ( g : )"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/proteinInput" />
 
@@ -73,7 +92,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="55dp"
         android:layout_marginEnd="32dp"
-        android:text="TextView"
+        android:textColor="@color/black"
+        android:text="Carb ( g : )"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/carbInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/protein_TV" />
@@ -84,7 +105,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="TextView"
+        android:text="Total Fat"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
@@ -94,7 +116,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="TextView"
+        android:text="Total Protein"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
@@ -105,7 +128,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="TextView"
+        android:textColor="@color/black"
+        android:text="Total Carb"
         app:layout_constraintEnd_toStartOf="@+id/totalFat"
         app:layout_constraintStart_toEndOf="@+id/totalProtein"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
@@ -131,7 +155,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="TextView"
+        android:text="Nutrition Tracking"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -141,7 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="376dp" />
+        app:layout_constraintGuide_begin="445dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

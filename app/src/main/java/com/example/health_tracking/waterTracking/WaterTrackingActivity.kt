@@ -91,8 +91,8 @@ class WaterTrackingActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        currentWaterIntakeTextView.text = getString(R.string.current_water_intake, currentWaterIntake)
-        dailyWaterGoalTextView.text = getString(R.string.daily_water_goal, dailyWaterGoal)
+//        currentWaterIntakeTextView.text = getString(R.string.current_water_intake, currentWaterIntake)
+//        dailyWaterGoalTextView.text = getString(R.string.daily_water_goal, dailyWaterGoal)
     }
 
     private fun saveWaterIntake(intake: Int) {
