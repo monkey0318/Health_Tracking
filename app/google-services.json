@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1015695152709",
+    "project_id": "mobileapp-2023-293ab",
+    "storage_bucket": "mobileapp-2023-293ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015695152709:android:ae14ba839b2a74e9fab52c",
+        "android_client_info": {
+          "package_name": "com.example.health_tracking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD15V933YICsC_eYyt5ZW2GR6cQGFb1N3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015695152709:android:1fd075e9721d324bfab52c",
+        "android_client_info": {
+          "package_name": "com.example.mobile_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD15V933YICsC_eYyt5ZW2GR6cQGFb1N3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
