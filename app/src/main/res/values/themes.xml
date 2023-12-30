@@ -3,6 +3,7 @@
     <style name="Base.Theme.Health_Tracking" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:colorBackground">@color/white</item>
     </style>
 
     <style name="Theme.Health_Tracking" parent="Base.Theme.Health_Tracking" />
