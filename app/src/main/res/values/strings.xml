@@ -2,5 +2,4 @@
     <string name="app_name">Health_Tracking</string>
     <string name="btnRegister">REGISTER</string>
     <string name="btnLogin">LOG IN</string>
-    <string name="title_activity_tracking">activity_tracking</string>
 </resources>
