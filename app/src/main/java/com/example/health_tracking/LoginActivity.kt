@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.health_tracking.nutritionTracking.TestingActivity
+import com.example.health_tracking.waterTracking.WaterTrackingActivity
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.AuthResult
@@ -38,7 +39,7 @@ class LoginActivity : AppCompatActivity(){
          if (task.isSuccessful) {
         val context = view.context
         //haven't know where to send
-           val intent = Intent(context, TestingActivity::class.java)
+           val intent = Intent(context, WaterTrackingActivity::class.java)
         context.startActivity(intent)
          }
         else{
