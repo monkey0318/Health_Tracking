@@ -14,44 +14,76 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/currentWaterIntakeTextView"
+        android:id="@+id/currentIntakeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:padding="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Current Intake: 0 ml"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/water_image" />
 
-    <Button
-        android:id="@+id/recordButton"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/userInputEditText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Record"
-        app:layout_constraintTop_toBottomOf="@id/currentWaterIntakeTextView"
+        android:hint="Enter water intake (ml)"
+        app:layout_constraintTop_toBottomOf="@+id/currentIntakeTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp" />
+
+    <Button
+        android:id="@+id/recordWaterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Record Water Intake"
+        app:layout_constraintTop_toBottomOf="@+id/userInputEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:id="@+id/goalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daily Goal: 2000 ml"
+        app:layout_constraintTop_toBottomOf="@+id/recordWaterButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp" />
+
+    <EditText
+        android:id="@+id/goalInputEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Set Daily Goal (ml)"
+        app:layout_constraintTop_toBottomOf="@+id/goalTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp" />
 
     <Button
         android:id="@+id/setGoalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Goal"
-        app:layout_constraintTop_toBottomOf="@id/recordButton"
+        android:text="Set Daily Goal"
+        app:layout_constraintTop_toBottomOf="@+id/goalInputEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <TextView
-        android:id="@+id/dailyWaterGoalTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/setGoalButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="16dp"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
