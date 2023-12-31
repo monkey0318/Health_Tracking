@@ -8,12 +8,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.health_tracking.nutritionTracking.TestingActivity
+import com.google.android.gms.tasks.Task
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity(){
+
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        //FirebaseApp.initializeApp(this)
+        auth = FirebaseAuth.getInstance()
+        FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_login)
         val emailLogin: EditText = findViewById(R.id.editEmailLoginText)
         val passwordLogin: EditText = findViewById(R.id.editPasswordLoginText)
@@ -25,18 +33,18 @@ class LoginActivity : AppCompatActivity(){
     }
 
     private fun loginCheckSuccess(view: View, email: String, password: String) {
-        // auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this)
-        // { task: Task<AuthResult> ->
-        // if (task.isSuccessful) {
+         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this)
+         { task: Task<AuthResult> ->
+         if (task.isSuccessful) {
         val context = view.context
         //haven't know where to send
-        //   val intent = Intent(context, Register::class.java)
+           val intent = Intent(context, TestingActivity::class.java)
         context.startActivity(intent)
-        // }
-        //else{
+         }
+        else{
         Toast.makeText(view.context, "Email/Password wrong", Toast.LENGTH_SHORT).show()
-        //  }
-        //  }
+          }
+          }
     }
 
 
