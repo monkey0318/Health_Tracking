@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.auth.User
 
 class RegisterActivity: AppCompatActivity() {
 
@@ -15,12 +17,12 @@ class RegisterActivity: AppCompatActivity() {
     lateinit var editEmailText: EditText
     lateinit var editPasswordText: EditText
 
-
+    data class User(val name:String, val email: String, val password: String)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        //data class User(val name:String, val email: String, val password: String)
+
 
         editNameText= findViewById(R.id.editNameText)
         editEmailText= findViewById(R.id.editEmailText)
@@ -44,11 +46,11 @@ class RegisterActivity: AppCompatActivity() {
         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             //store data
 
-            //val user= User(name,email,password)
-            //  val database = FirebaseDatabase.getInstance()
-            // val usersRef = database.getReference("users")
-            // val userId = usersRef.push().key
-            // usersRef.child(userId!!).setValue(user)
+            val user= User(name,email,password)
+              val database = FirebaseDatabase.getInstance()
+             val usersRef = database.getReference("users")
+             val userId = usersRef.push().key
+             usersRef.child(userId!!).setValue(user)
 
             loginAccount(view)
 

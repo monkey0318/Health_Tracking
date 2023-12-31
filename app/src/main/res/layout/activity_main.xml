@@ -50,9 +50,9 @@
         android:layout_height="48dp"
         android:layout_marginStart="87dp"
         android:layout_marginBottom="78dp"
-        android:background="@color/black"
+        android:background="@color/white"
         android:text="@string/btnRegister"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnLogin" />
 
