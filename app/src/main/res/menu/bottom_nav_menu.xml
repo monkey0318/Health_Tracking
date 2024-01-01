@@ -2,16 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Home"
+        android:id="@+id/home"
+
         android:icon="@drawable/baseline_home_24"
-        android:id="@+id/home"/>
+        android:title="Home" />
+    <item
+        android:title="Health Tracker"
+        android:id="@+id/healthTracker"
+        android:icon="@drawable/baseline_monitor_heart_24"
+         />
+    <item
+        android:title="Notification"
+        android:id="@+id/notification"
+        android:icon="@drawable/baseline_notifications_none_24"
+         />
     <item
         android:title="Profile"
         android:icon="@drawable/baseline_person_24"
         android:id="@+id/profile"/>
-    <item
-        android:title="Settings"
-        android:icon="@drawable/baseline_settings_24"
-        android:id="@+id/settings"/>
 
 </menu>
