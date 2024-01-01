@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 
 class TestingActivity : AppCompatActivity() {
     data class NutrientData(
@@ -26,7 +27,7 @@ class TestingActivity : AppCompatActivity() {
     private lateinit var totalCaloriesTextView: TextView
 
     private lateinit var mAuth: FirebaseAuth
-    private lateinit var databaseReference: DatabaseReference
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +39,7 @@ class TestingActivity : AppCompatActivity() {
         totalCaloriesTextView = findViewById(R.id.totalCaloriesTextView)
 
         mAuth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().reference
+        firestore = FirebaseFirestore.getInstance()
     }
 
     fun calculateTotalCalories(view: View) {
@@ -53,7 +54,6 @@ class TestingActivity : AppCompatActivity() {
         saveNutrientValues(protein, carbs, fats)
         saveNutrientHistory(protein, carbs, fats)
     }
-
     private fun parseEditText(editText: EditText): Double {
         val value = editText.text.toString()
         return if (value.isEmpty()) 0.0 else value.toDouble()
@@ -67,81 +67,106 @@ class TestingActivity : AppCompatActivity() {
     private fun saveNutrientValues(protein: Double, carbs: Double, fats: Double) {
         val user: FirebaseUser? = mAuth.currentUser
         user?.let {
-            val nutrientData = NutrientData(protein, carbs, fats)
-            val userReference: DatabaseReference = databaseReference.child("users").child(user.uid)
+            val nutrientData = hashMapOf(
+                "protein" to protein,
+                "carbs" to carbs,
+                "fats" to fats
+            )
 
-            userReference.setValue(nutrientData).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
+            firestore
+//                .collection("users")
+//                .document(user.uid)
+                .collection("nutrientData")
+                .document("current")
+                .set(nutrientData)
+                .addOnSuccessListener {
                     // Saved successfully
-                    println("Nutrient data saved successfully")
-                } else {
-                    // Handle the error
-                    println("Error saving nutrient data: ${task.exception?.message}")
+                    println("Current nutrient data saved successfully")
                 }
-            }
+                .addOnFailureListener { e ->
+                    // Handle the error
+                    println("Error saving current nutrient data: ${e.message}")
+                }
         }
     }
+
 
     private fun saveNutrientHistory(protein: Double, carbs: Double, fats: Double) {
         val user: FirebaseUser? = mAuth.currentUser
         user?.let {
-            val nutrientData = NutrientData(protein, carbs, fats)
-            val historyReference: DatabaseReference = databaseReference.child("history").child(user.uid).push()
+            val nutrientData = hashMapOf(
+                "protein" to protein,
+                "carbs" to carbs,
+                "fats" to fats
+            )
 
-            historyReference.setValue(nutrientData)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Saved successfully
-                        println("Nutrient data added to history successfully")
-                    } else {
-                        // Handle the error
-                        println("Error adding nutrient data to history: ${task.exception?.message}")
-                    }
+            firestore
+//                .collection("users")
+//                .document(user.uid)
+                .collection("nutrientDataHistory")
+                .add(nutrientData)
+                .addOnSuccessListener {
+                    // Saved successfully
+                    println("Nutrient data added to history successfully")
+                }
+                .addOnFailureListener { e ->
+                    // Handle the error
+                    println("Error adding nutrient data to history: ${e.message}")
                 }
         }
     }
 
+
     fun loadNutrientValues(view: View) {
         val user: FirebaseUser? = mAuth.currentUser
         user?.let {
-            val userReference: DatabaseReference = databaseReference.child("users").child(user.uid)
-
-            userReference.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        val nutrientData: NutrientData? = dataSnapshot.getValue(NutrientData::class.java)
+            firestore
+//                .collection("users")
+//                .document(user.uid)
+                .collection("nutrientData")
+                .document("current")
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        val nutrientData = documentSnapshot.toObject(NutrientData::class.java)
 
                         nutrientData?.let {
                             proteinEditText.setText(nutrientData.protein.toString())
                             carbsEditText.setText(nutrientData.carbs.toString())
                             fatsEditText.setText(nutrientData.fats.toString())
 
-                            val totalCalories = calculateCalories(nutrientData.protein, nutrientData.carbs, nutrientData.fats)
+                            val totalCalories =
+                                calculateCalories(nutrientData.protein, nutrientData.carbs, nutrientData.fats)
                             totalCaloriesTextView.text = String.format("Total Calories: %.2f", totalCalories)
                         }
+                    } else {
+                        // Handle the case where there is no current nutrient data for the user
+                        println("No current nutrient data found for the user")
                     }
                 }
-
-                override fun onCancelled(databaseError: DatabaseError) {
+                .addOnFailureListener { e ->
                     // Handle errors
+                    println("Error loading current nutrient data: ${e.message}")
                 }
-            })
         }
     }
+
 
     fun loadNutrientHistory(view: View) {
         val user: FirebaseUser? = mAuth.currentUser
         user?.let {
-            val historyReference: DatabaseReference = databaseReference.child("history").child(user.uid)
-
-            historyReference.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
+            firestore
+//                .collection("users")
+//                .document(user.uid)
+                .collection("nutrientDataHistory")
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (!querySnapshot.isEmpty) {
                         // Clear previous history
                         totalCaloriesTextView.text = ""
 
-                        for (historySnapshot in dataSnapshot.children) {
-                            val nutrientData: NutrientData? = historySnapshot.getValue(NutrientData::class.java)
+                        for (document in querySnapshot.documents) {
+                            val nutrientData = document.toObject(NutrientData::class.java)
 
                             nutrientData?.let {
                                 // Log or display each entry in the history
@@ -156,12 +181,10 @@ class TestingActivity : AppCompatActivity() {
                         println("No nutrient history found for the user")
                     }
                 }
-
-                override fun onCancelled(databaseError: DatabaseError) {
+                .addOnFailureListener { e ->
                     // Handle errors
-                    println("Error loading nutrient history: ${databaseError.message}")
+                    println("Error loading nutrient history: ${e.message}")
                 }
-            })
         }
     }
 }
