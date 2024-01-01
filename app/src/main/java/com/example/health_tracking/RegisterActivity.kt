@@ -10,6 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.health_tracking.databinding.ActivityMainBinding
+import com.example.health_tracking.databinding.ActivityRegisterBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -23,31 +25,32 @@ import com.google.firebase.firestore.firestore
 
 class RegisterActivity: AppCompatActivity() {
 
-    lateinit var editNameText: EditText
-    lateinit var editEmailText: EditText
-    lateinit var editPasswordText: EditText
+//    lateinit var editNameText: EditText
+//    lateinit var editEmailText: EditText
+//    lateinit var editPasswordText: EditText
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
-
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val db = Firebase.firestore
 
-        editNameText= findViewById(R.id.editNameText)
-        editEmailText= findViewById(R.id.editEmailText)
-        editPasswordText= findViewById(R.id.editPasswordText)
-        val name = editNameText.text.toString()
-        val email = editEmailText.text.toString()
-        val password = editPasswordText.text.toString()
-        val registerBtn: ImageView = findViewById(R.id.register_arrow)
-        val loginTextView: TextView = findViewById(R.id.loginTextView)
+//        editNameText= findViewById(R.id.editNameText)
+//        editEmailText= findViewById(R.id.editEmailText)
+//        editPasswordText= findViewById(R.id.editPasswordText)
+//        val name = editNameText.text.toString()
+//        val email = editEmailText.text.toString()
+//        val password = editPasswordText.text.toString()
+//        val registerBtn: ImageView = findViewById(R.id.register_arrow)
+//        val loginTextView: TextView = findViewById(R.id.loginTextView)
 
-        registerBtn.setOnClickListener { checkEmpty(it) }
-        loginTextView.setOnClickListener { loginAccount(it) }
+        binding.registerArrow.setOnClickListener { checkEmpty(it) }
+        binding.loginTextView.setOnClickListener { loginAccount(it) }
 
         mAuth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
@@ -55,9 +58,9 @@ class RegisterActivity: AppCompatActivity() {
     }
 
     private fun checkEmpty(view: View){
-        val name = editNameText.text.toString()
-        val email = editEmailText.text.toString()
-        val password = editPasswordText.text.toString()
+        val name = binding.editNameText.text.toString()
+        val email = binding.editEmailText.text.toString()
+        val password = binding.editPasswordText.text.toString()
 
         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             // Store data

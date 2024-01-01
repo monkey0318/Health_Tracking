@@ -1,35 +1,33 @@
 package com.example.health_tracking
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.health_tracking.activityTracking.running
 import com.example.health_tracking.activityTracking.saveActivity
-import com.example.health_tracking.nutritionTracking.TestingActivity
+import com.example.health_tracking.databinding.ActivityBinding
+import com.example.health_tracking.databinding.ActivityMainBinding
+import com.example.health_tracking.databinding.ActivityRunningBinding
+import com.example.health_tracking.databinding.ActivitySaveBinding
+
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var btnLogin :Button
-    private lateinit var btnRegister: Button
+    private lateinit var binding: ActivityMainBinding
 
-    @SuppressLint("MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnLogin = findViewById(R.id.btnLogin)
-        btnRegister = findViewById(R.id.btnRegister)
-
-
-
-        btnLogin.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             val intent = Intent(this, saveActivity::class.java)
             startActivity(intent)
         }
 
-        btnRegister.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
