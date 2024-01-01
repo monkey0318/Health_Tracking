@@ -69,7 +69,7 @@ class WaterTrackingActivity : AppCompatActivity() {
         // Update Firestore document in the "goals" subcollection
         val userId = auth.currentUser?.uid
         userId?.let {
-            val goalsCollection = firestore.collection("users").document(it).collection("goals")
+            val goalsCollection = firestore.collection("waterData").document(it).collection("goals")
             val goalDoc = goalsCollection.document("daily_goal")
 
             goalDoc.update("waterIntake", currentWaterIntake)
@@ -92,10 +92,18 @@ class WaterTrackingActivity : AppCompatActivity() {
         // Update Firestore document in the "goals" subcollection
         val userId = auth.currentUser?.uid
         userId?.let {
-            val goalsCollection = firestore.collection("users").document(it).collection("goals")
+            val goalsCollection = firestore.collection("waterData").document(it).collection("goals")
             val goalDoc = goalsCollection.document("daily_goal")
 
             goalDoc.set(mapOf("dailyGoal" to goalAmount))
+                .addOnSuccessListener {
+                    // Update UI after successfully setting the goal
+                    updateUI()
+                }
+                .addOnFailureListener { e ->
+                    // Handle failure, if needed
+                    Log.e("Firestore", "Error updating goal", e)
+                }
         }
     }
 
@@ -106,7 +114,7 @@ class WaterTrackingActivity : AppCompatActivity() {
     private fun loadSavedData() {
         val userId = auth.currentUser?.uid
         userId?.let {
-            val goalsCollection = firestore.collection("users").document(it).collection("goals")
+            val goalsCollection = firestore.collection("waterData").document(it).collection("goals")
             val goalDoc = goalsCollection.document("daily_goal")
 
             // Read data from Firestore document in the "goals" subcollection
@@ -114,9 +122,15 @@ class WaterTrackingActivity : AppCompatActivity() {
                 if (documentSnapshot.exists()) {
                     val goalAmount = documentSnapshot.getLong("dailyGoal")?.toInt() ?: 2000
                     goalTextView.text = getString(R.string.daily_goal, goalAmount)
-                    currentWaterIntake = documentSnapshot.getLong("waterIntake")?.toInt() ?: 0
+
+                    // Update UI after successfully loading the goal
+                    updateUI()
                 }
             }
+                .addOnFailureListener { e ->
+                    // Handle failure, if needed
+                    Log.e("Firestore", "Error loading goal", e)
+                }
         }
     }
 

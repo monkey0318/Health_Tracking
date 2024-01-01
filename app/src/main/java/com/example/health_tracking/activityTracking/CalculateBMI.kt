@@ -14,27 +14,19 @@ import com.example.health_tracking.databinding.ActivityCalculateBmiBinding
 class CalculateBMI : AppCompatActivity() {
 
     private lateinit var binding: ActivityCalculateBmiBinding
-    private lateinit var editTextWeight: EditText
-    private lateinit var editTextHeight: EditText
-    private lateinit var buttonCalculate: Button
-    private lateinit var textViewResult: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityCalculateBmiBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        editTextWeight = findViewById(R.id.editTextWeight)
-        editTextHeight = findViewById(R.id.editTextHeight)
-        buttonCalculate = findViewById(R.id.buttonCalculate)
-        textViewResult = findViewById(R.id.textViewResult)
 
-        buttonCalculate.setOnClickListener { calculateBMI() }
+        binding.buttonCalculate.setOnClickListener { calculateBMI() }
     }
 
     private fun calculateBMI() {
         // Get user input
-        val weight = editTextWeight.text.toString().toFloatOrNull()
-        val heightInCm = editTextHeight.text.toString().toFloatOrNull()
+        val weight = binding.editTextWeight.text.toString().toFloatOrNull()
+        val heightInCm = binding.editTextHeight.text.toString().toFloatOrNull()
 
         // Check if the input is valid
         if (weight != null && heightInCm != null && heightInCm > 0) {
@@ -54,10 +46,10 @@ class CalculateBMI : AppCompatActivity() {
 
             // Display the result
             val resultText = String.format("BMI: %.2f\nCategory: %s", bmi, category)
-            textViewResult.text = resultText
+            binding.textViewResult.text = resultText
         } else {
             // Display an error message if input is invalid
-            textViewResult.text = "Invalid input. Please enter valid weight and height."
+            binding.textViewResult.text = "Invalid input. Please enter valid weight and height."
         }
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.TextView
 import com.example.health_tracking.R
 import com.example.health_tracking.databinding.ActivitySaveBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -13,7 +14,7 @@ class saveActivity : AppCompatActivity() {
 
     private val viewModel = saveActivityViewModel()
     private lateinit var binding: ActivitySaveBinding
-    private lateinit var subButton: Button
+    private lateinit var history : TextView
 
     // Initialize Firestore
     val db = FirebaseFirestore.getInstance()
@@ -22,7 +23,8 @@ class saveActivity : AppCompatActivity() {
         binding = ActivitySaveBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        subButton = findViewById(R.id.submitButton)
+
+        history = findViewById(R.id.history)
 
 
         binding.activitySpinner.adapter = ArrayAdapter(
@@ -31,7 +33,7 @@ class saveActivity : AppCompatActivity() {
             resources.getStringArray(R.array.activity_array)
         )
 
-        subButton.setOnClickListener { calculateCalories(it) }
+        binding.submitButton.setOnClickListener { calculateCalories(it) }
 
     }
 
