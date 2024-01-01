@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/login_image"
                 android:layout_width="match_parent"
-                android:layout_height="302dp"
+                android:layout_height="268dp"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/top_background2" />
 

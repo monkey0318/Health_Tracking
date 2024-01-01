@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/login_image"
                 android:layout_width="match_parent"
-                android:layout_height="373dp"
+                android:layout_height="323dp"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/top_background1" />
 
@@ -79,51 +79,18 @@
                 android:layout_marginEnd="32dp"
                 app:srcCompat="@drawable/btn_arraw1" />
 
+            <TextView
+                android:id="@+id/registerTextView"
+                style="@style/small_login_register_text"
+                android:text="Are you a new user? Register" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp">
-
-                <Button
-                    android:id="@+id/facebook_button"
-                    style="@android:style/Widget.Button.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_background"
-                    android:drawableEnd="@drawable/facebook"
-                    android:drawablePadding="16dp"
-                    android:padding="8dp"
-                    android:text="Facebook"
-                    android:textColor="#3b608c"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="32dp"/>
-
-                <Button
-                    android:id="@+id/google_button"
-                    style="@android:style/Widget.Button.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_background"
-                    android:drawableEnd="@drawable/google"
-                    android:drawablePadding="16dp"
-                    android:padding="8dp"
-                    android:text="Google"
-                    android:textColor="#3b608c"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/registerTextView"
-                android:text="Are you a new user? Register"
-                style="@style/small_login_register_text" />
+                android:layout_marginTop="16dp"/>
 
         </LinearLayout>
     </ScrollView>
