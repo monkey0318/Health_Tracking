@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="activity_array">
+        <item>Badminton</item>
+        <item>Running</item>
+        <item>Gym</item>
+        <item>Swimming</item>
+        <!-- Add more activities if needed -->
+    </string-array>
+</resources>
