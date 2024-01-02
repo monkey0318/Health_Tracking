@@ -34,7 +34,7 @@
             android:name=".waterTracking.WaterTrackingActivity"
             android:exported="false" />
         <activity
-            android:name=".nutritionTracking.TestingActivity"
+            android:name=".nutritionTracking.NutritionTrackingActivity"
             android:exported="false" />
         <activity
             android:name=".profile.UpdateProfileActivity"

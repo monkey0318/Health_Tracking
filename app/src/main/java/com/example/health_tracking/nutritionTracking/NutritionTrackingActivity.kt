@@ -6,50 +6,48 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import com.example.health_tracking.R
+import com.example.health_tracking.databinding.ActivityNutritionTrackingBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 
-class TestingActivity : AppCompatActivity() {
+class NutritionTrackingActivity : AppCompatActivity() {
     data class NutrientData(
         val protein: Double = 0.0,
         val carbs: Double = 0.0,
         val fats: Double = 0.0
     )
-    private lateinit var proteinEditText: EditText
-    private lateinit var carbsEditText: EditText
-    private lateinit var fatsEditText: EditText
-    private lateinit var totalCaloriesTextView: TextView
+//    private lateinit var proteinEditText: EditText
+//    private lateinit var carbsEditText: EditText
+//    private lateinit var fatsEditText: EditText
+//    private lateinit var totalCaloriesTextView: TextView
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
+    private lateinit var binding: ActivityNutritionTrackingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_testing)
+        binding = ActivityNutritionTrackingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        proteinEditText = findViewById(R.id.proteinEditText)
-        carbsEditText = findViewById(R.id.carbsEditText)
-        fatsEditText = findViewById(R.id.fatsEditText)
-        totalCaloriesTextView = findViewById(R.id.totalCaloriesTextView)
+//        proteinEditText = findViewById(R.id.proteinEditText)
+//        carbsEditText = findViewById(R.id.carbsEditText)
+//        fatsEditText = findViewById(R.id.fatsEditText)
+//        totalCaloriesTextView = findViewById(R.id.totalCaloriesTextView)
 
         mAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
     }
 
     fun calculateTotalCalories(view: View) {
-        val protein = parseEditText(proteinEditText)
-        val carbs = parseEditText(carbsEditText)
-        val fats = parseEditText(fatsEditText)
+        val protein = parseEditText(binding.proteinEditText)
+        val carbs = parseEditText(binding.carbsEditText)
+        val fats = parseEditText(binding.fatsEditText)
 
         val totalCalories = calculateCalories(protein, carbs, fats)
 
-        totalCaloriesTextView.text = String.format("Total Calories: %.2f", totalCalories)
+        binding.totalCaloriesTextView.text = String.format("Total Calories: %.2f", totalCalories)
 
         saveNutrientValues(protein, carbs, fats)
         saveNutrientHistory(protein, carbs, fats)
@@ -131,13 +129,13 @@ class TestingActivity : AppCompatActivity() {
                         val nutrientData = documentSnapshot.toObject(NutrientData::class.java)
 
                         nutrientData?.let {
-                            proteinEditText.setText(nutrientData.protein.toString())
-                            carbsEditText.setText(nutrientData.carbs.toString())
-                            fatsEditText.setText(nutrientData.fats.toString())
+                            binding.proteinEditText.setText(nutrientData.protein.toString())
+                            binding.carbsEditText.setText(nutrientData.carbs.toString())
+                            binding.fatsEditText.setText(nutrientData.fats.toString())
 
                             val totalCalories =
                                 calculateCalories(nutrientData.protein, nutrientData.carbs, nutrientData.fats)
-                            totalCaloriesTextView.text = String.format("Total Calories: %.2f", totalCalories)
+                            binding.totalCaloriesTextView.text = String.format("Total Calories: %.2f", totalCalories)
                         }
                     } else {
                         // Handle the case where there is no current nutrient data for the user
@@ -163,7 +161,7 @@ class TestingActivity : AppCompatActivity() {
                 .addOnSuccessListener { querySnapshot ->
                     if (!querySnapshot.isEmpty) {
                         // Clear previous history
-                        totalCaloriesTextView.text = ""
+                        binding.totalCaloriesTextView.text = ""
 
                         for (document in querySnapshot.documents) {
                             val nutrientData = document.toObject(NutrientData::class.java)
@@ -173,7 +171,7 @@ class TestingActivity : AppCompatActivity() {
                                 println("History entry: $nutrientData")
 
                                 // Append history to TextView (this is just an example, you might want to display it differently)
-                                totalCaloriesTextView.append("\n${nutrientData.protein}, ${nutrientData.carbs}, ${nutrientData.fats}")
+                                binding.totalCaloriesTextView.append("\n${nutrientData.protein}, ${nutrientData.carbs}, ${nutrientData.fats}")
                             }
                         }
                     } else {

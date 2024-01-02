@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.health_tracking.R
+import com.example.health_tracking.databinding.ActivityWaterTrackingBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,29 +20,16 @@ class WaterTrackingActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
-    private lateinit var currentIntakeTextView: TextView
-    private lateinit var goalTextView: TextView
-    private lateinit var userInputEditText: EditText
-    private lateinit var goalInputEditText: EditText
-    private lateinit var recordWaterButton: Button
-    private lateinit var setGoalButton: Button
 
     private var currentWaterIntake = 0
-    private lateinit var binding : WaterTrackingActivity
+    private lateinit var binding : ActivityWaterTrackingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityWaterTrackingBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_water_tracking)
 
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
-
-        // Initialize views
-        currentIntakeTextView = findViewById(R.id.currentIntakeTextView)
-        goalTextView = findViewById(R.id.goalTextView)
-        userInputEditText = findViewById(R.id.userInputEditText)
-        goalInputEditText = findViewById(R.id.goalInputEditText)
-        recordWaterButton = findViewById(R.id.recordWaterButton)
-        setGoalButton = findViewById(R.id.setGoalButton)
 
         // Load saved data if available
         loadSavedData()
@@ -50,13 +38,13 @@ class WaterTrackingActivity : AppCompatActivity() {
         updateUI()
 
         // Button click event
-        recordWaterButton.setOnClickListener {
+        binding.recordWaterButton.setOnClickListener {
             recordWaterIntake()
             updateUI()
         }
 
         // Set goal button click event
-        setGoalButton.setOnClickListener {
+        binding.setGoalButton.setOnClickListener {
             setWaterGoal()
             updateUI()
         }
@@ -64,7 +52,7 @@ class WaterTrackingActivity : AppCompatActivity() {
 
     private fun recordWaterIntake() {
         // Assuming the user inputs the water intake amount
-        val intakeAmount = userInputEditText.text.toString().toIntOrNull() ?: 0
+        val intakeAmount = binding.userInputEditText.text.toString().toIntOrNull() ?: 0
         currentWaterIntake += intakeAmount
 
         // Update Firestore document in the "goals" subcollection
@@ -76,7 +64,7 @@ class WaterTrackingActivity : AppCompatActivity() {
             goalDoc.update("waterIntake", currentWaterIntake)
 
             // Check if the daily goal is reached
-            val goalAmount = goalInputEditText.text.toString().toIntOrNull() ?: 0
+            val goalAmount = binding.goalInputEditText.text.toString().toIntOrNull() ?: 0
             if (currentWaterIntake >= goalAmount) {
                 notifyUserGoalAchieved()
             }
@@ -88,7 +76,7 @@ class WaterTrackingActivity : AppCompatActivity() {
 
     private fun setWaterGoal() {
         // Assuming the user inputs the water goal amount
-        val goalAmount = goalInputEditText.text.toString().toIntOrNull() ?: 0
+        val goalAmount = binding.goalInputEditText.text.toString().toIntOrNull() ?: 0
 
         // Update Firestore document in the "goals" subcollection
         val userId = auth.currentUser?.uid
@@ -109,7 +97,7 @@ class WaterTrackingActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        currentIntakeTextView.text = getString(R.string.current_intake, currentWaterIntake)
+        binding.currentIntakeTextView.text = getString(R.string.current_intake, currentWaterIntake)
     }
 
     private fun loadSavedData() {
@@ -122,7 +110,7 @@ class WaterTrackingActivity : AppCompatActivity() {
             goalDoc.get().addOnSuccessListener { documentSnapshot ->
                 if (documentSnapshot.exists()) {
                     val goalAmount = documentSnapshot.getLong("dailyGoal")?.toInt() ?: 2000
-                    goalTextView.text = getString(R.string.daily_goal, goalAmount)
+                    binding.goalTextView.text = getString(R.string.daily_goal, goalAmount)
 
                     // Update UI after successfully loading the goal
                     updateUI()
