@@ -2,6 +2,7 @@ package com.example.health_tracking
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import com.example.health_tracking.nutritionTracking.NutritionFragment
 import com.example.health_tracking.ui.dashboard.DashboardFragment
 import com.example.health_tracking.ui.notifications.NotificationsFragment
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.FirebaseFirestore
 
 class DrawerActivity  : AppCompatActivity() {
 
@@ -20,6 +22,7 @@ class DrawerActivity  : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
+    private lateinit var db: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,6 +38,44 @@ class DrawerActivity  : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        db = FirebaseFirestore.getInstance()
+
+        // Retrieve user email  from LoginActivity
+        val currentUserEmail = intent.getStringExtra("email")
+
+        // Get the NavigationView from the layout
+        val navView: NavigationView = findViewById(R.id.navigationView)
+
+        // Inflate the header layout to access its views
+        val headerView = navView.getHeaderView(0)
+
+        val nameTextView: TextView = headerView.findViewById(R.id.nameTextView)
+
+        // Retrieve the username from Firestore based on the user's email
+        if (currentUserEmail != null) {
+            db.collection("users")
+                .whereEqualTo("email", currentUserEmail)
+                .get()
+                .addOnSuccessListener { result ->
+                    if (result.isEmpty) {
+                        Toast.makeText(applicationContext, "user not found!!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Successfully found the user in Firestore
+                        val name = result.documents[0].getString("name")
+                        nameTextView.text = "$name"
+                    }
+                }
+                .addOnFailureListener { exception ->
+
+                    Toast.makeText(applicationContext, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
+        else{Toast.makeText(applicationContext, "Error:No user info", Toast.LENGTH_SHORT).show()}
+
+
+
+
+        startFirstFragment(DashboardFragment())
         navView.setNavigationItemSelectedListener {
 
             it.isChecked = true
@@ -42,7 +83,7 @@ class DrawerActivity  : AppCompatActivity() {
 
                 R.id.home -> placeFragment(DashboardFragment(),it.title.toString())
               //  R.id.profile -> placeFragment(DashboardFragment(),it.title.toString())
-               // R.id.sleepTracking -> placeFragment(DashboardFragment(),it.title.toString())
+               R.id.sleepTracking -> placeFragment(SleepTrackingFragment(),it.title.toString())
                 R.id.nutritionTracking -> placeFragment(NutritionFragment(),it.title.toString())
               //  R.id.waterTracking -> placeFragment(DashboardFragment(),it.title.toString())
                // R.id.activityTracking -> placeFragment(DashboardFragment(),it.title.toString())
@@ -58,6 +99,13 @@ class DrawerActivity  : AppCompatActivity() {
 
     }
 
+    private fun startFirstFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer,fragment)
+        transaction.commit()
+
+
+    }
     private fun placeFragment(fragment: Fragment,title:String){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer,fragment)
