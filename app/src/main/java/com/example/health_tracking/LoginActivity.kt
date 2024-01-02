@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
                     // Successfully found a matching user in Firestore
                     Toast.makeText(applicationContext, "Login Successfully", Toast.LENGTH_SHORT).show()
                     val context = view.context
-                    val intent = Intent(context, NavActivity::class.java)
+                    val intent = Intent(context, DrawerActivity::class.java)
                     startActivity(intent)
                 }
             }

@@ -67,7 +67,7 @@
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".NavActivity"
+            android:name=".DrawerActivity"
             android:exported="true" />
     </application>
 

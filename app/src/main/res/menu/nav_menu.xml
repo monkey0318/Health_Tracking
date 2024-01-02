@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
+    <item
+        android:title="Profile"
+        android:icon="@drawable/baseline_person_24"
+        android:id="@+id/profile"/>
+    <item
+        android:title="Sleep Tracking"
+        android:id="@+id/sleepTracking"
+        android:icon="@drawable/baseline_monitor_heart_24"
+         />
+    <item
+        android:id="@+id/nutritionTracking"
+        android:icon="@drawable/baseline_dinner_dining_24"
+
+
+        android:title="Nutrition Tracking" />
+    <item
+        android:id="@+id/waterTracking"
+        android:icon="@drawable/baseline_water_drop_24"
+
+        android:title="Water Tracking" />
+    <item
+        android:id="@+id/activityTracking"
+        android:icon="@drawable/baseline_directions_run_24"
+
+        android:title="Activity Tracking" />
+    <item
+        android:id="@+id/bmiCalculator"
+        android:icon="@drawable/baseline_monitor_weight_24"
+
+        android:title="Bmi Calculator" />
+    <item
+        android:title="Notification"
+        android:id="@+id/notification"
+        android:icon="@drawable/baseline_notifications_none_24"
+         />
+
+
+
+</menu>
