@@ -13,7 +13,7 @@ class saveActivity : AppCompatActivity() {
 
     private val viewModel = saveActivityViewModel()
     private lateinit var binding: ActivitySaveBinding
-    private lateinit var subButton: Button
+
 
     // Initialize Firestore
     val db = FirebaseFirestore.getInstance()
@@ -22,7 +22,6 @@ class saveActivity : AppCompatActivity() {
         binding = ActivitySaveBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        subButton = findViewById(R.id.submitButton)
 
 
         binding.activitySpinner.adapter = ArrayAdapter(
@@ -31,7 +30,7 @@ class saveActivity : AppCompatActivity() {
             resources.getStringArray(R.array.activity_array)
         )
 
-        subButton.setOnClickListener { calculateCalories(it) }
+        binding.submitButton.setOnClickListener { calculateCalories(it) }
 
     }
 

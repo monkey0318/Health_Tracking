@@ -27,6 +27,7 @@ class WaterTrackingActivity : AppCompatActivity() {
     private lateinit var setGoalButton: Button
 
     private var currentWaterIntake = 0
+    private lateinit var binding : WaterTrackingActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_water_tracking)

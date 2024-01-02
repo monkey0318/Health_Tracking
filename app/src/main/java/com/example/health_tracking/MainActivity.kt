@@ -1,6 +1,7 @@
 package com.example.health_tracking
 
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, saveActivity::class.java)
+            val intent = Intent(this, com.example.health_tracking.activityTracking.Activity::class.java)
             startActivity(intent)
         }
 

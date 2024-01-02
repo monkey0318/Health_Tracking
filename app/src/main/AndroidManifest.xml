@@ -31,22 +31,13 @@
             android:name=".activityTracking.CalculateBMI"
             android:exported="false" />
         <activity
-            android:name=".activityTracking.Activity"
-            android:exported="false" />
-        <activity
-            android:name=".waterTracking.WaterTestingActivity"
+            android:name=".waterTracking.WaterTrackingActivity"
             android:exported="false" />
         <activity
             android:name=".nutritionTracking.TestingActivity"
             android:exported="false" />
         <activity
             android:name=".profile.UpdateProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".waterTracking.WaterTrackingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".nutritionTracking.NutritionTrackingActivity"
             android:exported="false" />
         <activity
             android:name=".profile.ProfileActivity"

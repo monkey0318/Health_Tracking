@@ -9,22 +9,16 @@ import com.example.health_tracking.databinding.ActivityBinding
 
 class Activity : AppCompatActivity() {
 
-
     private lateinit var binding: ActivityBinding
-    private lateinit var exButton: Button
-    private lateinit var calButton: Button
-    private lateinit var actButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        exButton = findViewById(R.id.exButton)
-        calButton = findViewById(R.id.calButton)
-        actButton = findViewById(R.id.actButton)
 
-        exButton.setOnClickListener { launchActivity("running") }
-        calButton.setOnClickListener { launchActivity("CalculateBMI") }
-        actButton.setOnClickListener { launchActivity("saveActivity") }
+        binding.exButton.setOnClickListener { launchActivity("running") }
+        binding.calButton.setOnClickListener { launchActivity("CalculateBMI") }
+        binding.actButton.setOnClickListener { launchActivity("saveActivity") }
     }
 
     private fun launchActivity(activityName: String) {
