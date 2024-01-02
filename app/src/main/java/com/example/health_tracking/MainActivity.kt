@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.health_tracking.activityTracking.ActivityLayout
 import com.example.health_tracking.activityTracking.saveActivity
 import com.example.health_tracking.databinding.ActivityBinding
 import com.example.health_tracking.databinding.ActivityMainBinding
@@ -17,14 +18,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, ActivityLayout::class.java)
             startActivity(intent)
         }
 

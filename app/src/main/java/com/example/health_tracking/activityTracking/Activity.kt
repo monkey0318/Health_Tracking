@@ -3,8 +3,6 @@ package com.example.health_tracking.activityTracking
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import com.example.health_tracking.R
 import com.example.health_tracking.databinding.ActivityBinding
 
 class Activity : AppCompatActivity() {
