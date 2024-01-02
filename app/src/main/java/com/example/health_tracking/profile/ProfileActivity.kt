@@ -1,72 +1,121 @@
 package com.example.health_tracking.profile
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.health_tracking.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.auth.User
-
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ProfileActivity : AppCompatActivity() {
-    data class User(val name:String, val email: String, val password: String){
-        constructor() : this("","","")
-    }
-    private lateinit var txtUsername: TextView
-    private lateinit var txtEmail: TextView
-    private lateinit var txtPassword: TextView
-    private lateinit var btnUpdate: Button
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var userRef: DatabaseReference
+    data class User(
+        val name: String,
+        val email: String,
+        val password: String
+    ){
+        constructor() : this("", "", "")
+    }
+
+    private lateinit var editTextName: EditText
+    private lateinit var editTextEmail: EditText
+    private lateinit var editTextPassword: EditText
+    private lateinit var buttonSave: Button
+    private lateinit var textViewFirestoreData: TextView
+    private val db = FirebaseFirestore.getInstance()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        auth = FirebaseAuth.getInstance()
-        val userId = auth.currentUser?.uid
-        userRef = FirebaseDatabase.getInstance().getReference("users").child(userId.orEmpty())
+        editTextName = findViewById(R.id.editTextName)
+        editTextEmail = findViewById(R.id.editTextEmail)
+        editTextPassword = findViewById(R.id.editTextPassword)
+        buttonSave = findViewById(R.id.buttonSave)
+        textViewFirestoreData = findViewById(R.id.textViewFirestoreData)
 
-        initializeViews()
-        fetchUserData()
+        // Fetch and display user data when this activity starts
+        fetchAndDisplayUserData()
 
-        btnUpdate.setOnClickListener {
-            // Implement update logic here
-            val intent = Intent(this@ProfileActivity,UpdateProfileActivity::class.java)
-            startActivity(intent)
+        buttonSave.setOnClickListener {
+            saveUser()
         }
     }
-    private fun initializeViews() {
-        txtUsername = findViewById(R.id.txtUsername)
-        txtEmail = findViewById(R.id.txtEmail)
-        txtPassword = findViewById(R.id.txtPassword)
-        btnUpdate = findViewById(R.id.btnUpdate)
-    }
 
-    private fun fetchUserData() {
-        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val currentUser = snapshot.getValue(User::class.java)
-                    currentUser?.let {
-                        txtUsername.text = it.name
-                        txtEmail.text = it.email
-                        txtPassword.text = it.password
-                        // Password is not displayed for security reasons
-                    }
+    private fun fetchAndDisplayUserData() {
+        // Fetch user data from Firestore
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot.documents) {
+                    val user = document.toObject(User::class.java)
+                    displayUserData(user)
                 }
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle errors, if any
+            .addOnFailureListener { e ->
+                showToast("Error fetching user data: ${e.message}")
             }
-        })
+    }
+
+    private fun displayUserData(user: User?) {
+        if (user != null) {
+            editTextName.setText(user.name)
+            editTextEmail.setText(user.email)
+
+            // Display Firestore data in the added TextView
+            val userDataText = "\nName: ${user.name}\nEmail: ${user.email}"
+            textViewFirestoreData.text = userDataText
+        }
+    }
+
+    private fun saveUser() {
+        val name = editTextName.text.toString().trim()
+        val email = editTextEmail.text.toString().trim()
+        val password = editTextPassword.text.toString().trim()
+
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            showToast("Please enter name, email, and password.")
+            return
+        }
+
+        val updatedUser = User(name, email, password)
+
+        // Update user data in Firestore
+        db.collection("users")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot.documents) {
+                    document.reference.set(updatedUser)
+                        .addOnSuccessListener {
+                            showToast("Profile updated successfully")
+                        }
+                        .addOnFailureListener { e ->
+                            showToast("Error updating profile: ${e.message}")
+                        }
+                    return@addOnSuccessListener
+                }
+
+                // If no matching document found, add a new one
+                db.collection("users")
+                    .add(updatedUser)
+                    .addOnSuccessListener {
+                        showToast("Profile updated successfully")
+                    }
+                    .addOnFailureListener { e ->
+                        showToast("Error updating profile: ${e.message}")
+                    }
+            }
+            .addOnFailureListener { e ->
+                showToast("Error updating profile: ${e.message}")
+            }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

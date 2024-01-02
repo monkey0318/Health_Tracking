@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.health_tracking.profile.ProfileActivity
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
@@ -44,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
 
                     val context = view.context
-                    val intent = Intent(context, DrawerActivity::class.java)
+                    val intent = Intent(context, ProfileActivity::class.java)
                     intent.putExtra("email", email)
                     startActivity(intent)
 
