@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
 
                     val context = view.context
-                    val intent = Intent(context, NutritionTrackingActivity::class.java)
+                    val intent = Intent(context, DrawerActivity::class.java)
                     intent.putExtra("email", email)
                     startActivity(intent)
 
