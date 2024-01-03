@@ -37,11 +37,19 @@
 
         android:title="Bmi Calculator" />
     <item
-        android:title="Notification"
-        android:id="@+id/notification"
-        android:icon="@drawable/baseline_notifications_none_24"
-         />
-
-
+        android:title="Runner"
+        android:id="@+id/runner"
+        android:icon="@drawable/running"
+        />
+    <item
+        android:title="CaloriesCalculator"
+        android:id="@+id/calCalculator"
+        android:icon="@drawable/baseline_calculate_24"
+        />
+    <item
+        android:title="LogOut"
+        android:id="@+id/logout"
+        android:icon="@drawable/baseline_logout_24"
+        />
 
 </menu>

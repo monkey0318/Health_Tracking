@@ -1,20 +1,10 @@
 package com.example.health_tracking
 
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import com.example.health_tracking.activityTracking.ActivityLayout
-import com.example.health_tracking.activityTracking.saveActivity
-import com.example.health_tracking.databinding.ActivityBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.example.health_tracking.databinding.ActivityMainBinding
-import com.example.health_tracking.databinding.ActivityRunningBinding
-import com.example.health_tracking.databinding.ActivitySaveBinding
-import com.example.health_tracking.nutritionTracking.NutritionFragment
-import com.example.health_tracking.nutritionTracking.NutritionTrackingActivity
-import com.example.health_tracking.waterTracking.WaterTrackingActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, DrawerActivity::class.java)
             startActivity(intent)
         }
 

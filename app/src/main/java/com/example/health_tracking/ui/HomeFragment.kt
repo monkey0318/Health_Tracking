@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.health_tracking.R
-import com.example.health_tracking.data.Friend
+import com.example.health_tracking.activityTracking.data.Exercise
 import com.example.health_tracking.databinding.FragmentHomeBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -35,29 +35,42 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun read() {
-        // TODO
-        Firebase.firestore
-            .collection("friends")
-            .get()
-            .addOnSuccessListener { snap ->
-                val list = snap.toObjects<Friend>()
-                var result = ""
-                list.forEach { f -> result += "${f.id} ${f.name} ${f.age}\n" }
-                binding.txtResult.text = result
+//    private fun read() {
+//        // TODO
+//        Firebase.firestore
+//            .collection("friends")
+//            .get()
+//            .addOnSuccessListener { snap ->
+//                val list = snap.toObjects<Friend>()
+//                var result = ""
+//                list.forEach { f -> result += "${f.id} ${f.name} ${f.age}\n" }
+//                binding.txtResult.text = result
+//
+//            }
 
-            }
+        private fun read() {
+            // TODO
+            Firebase.firestore
+                .collection("Exercises")
+                .get()
+                .addOnSuccessListener { snap ->
+                    val list = snap.toObjects<Exercise>()
+                    var result = ""
+                    list.forEach { e -> result += "${e.index} ${e.exercise} ${e.calories}\n" }
+                    binding.txtResult.text = result
+
+                }
     }
 
     //Use this when u want to update all fields
     private fun set() {
         // TODO
-        val f = Friend("1", "Badminton", 200)
+        val e = Exercise("2", "SampleExercise", 200)
 
         Firebase.firestore
-            .collection("friends")
-            .document(f.id)
-            .set(f)
+            .collection("Exercises")
+            .document(e.index)
+            .set(e)
             .addOnSuccessListener {
                 toast("Record inserted!")
             }
@@ -66,9 +79,9 @@ class HomeFragment : Fragment() {
     private fun update() {
         // TODO
         Firebase.firestore
-            .collection("friends")
-            .document("1")
-            .update("age",300)
+            .collection("Exercises")
+            .document("2")
+            .update("calories",3000)
             .addOnSuccessListener {
                 toast("Record updated!")
             }
@@ -77,8 +90,8 @@ class HomeFragment : Fragment() {
     private fun delete() {
         // TODO
         Firebase.firestore
-            .collection("friends")
-            .document("A004")
+            .collection("Exercises")
+            .document("2")
             .delete()
             .addOnSuccessListener {
                 toast("Record deleted!")

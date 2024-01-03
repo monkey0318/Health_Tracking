@@ -10,12 +10,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.health_tracking.data.Friend
-import com.example.health_tracking.data.ActivityViewModel
+import com.example.health_tracking.activityTracking.data.Exercise
+import com.example.health_tracking.activityTracking.data.testActivityViewModel
+import com.example.health_tracking.activityTracking.util.cropToBlob
+import com.example.health_tracking.activityTracking.util.errorDialog
+import com.example.health_tracking.activityTracking.util.toBitmap
 import com.example.health_tracking.databinding.FragmentUpdateBinding
-import com.example.health_tracking.util.cropToBlob
-import com.example.health_tracking.util.errorDialog
-import com.example.health_tracking.util.toBitmap
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -23,9 +23,9 @@ class UpdateFragment : Fragment() {
 
     private lateinit var binding: FragmentUpdateBinding
     private val nav by lazy { findNavController() }
-    private val vm: ActivityViewModel by activityViewModels()
+    private val vm: testActivityViewModel by activityViewModels ()
 
-    private val id by lazy { requireArguments().getString("id") ?: "" }
+    private val id by lazy { requireArguments().getString("index") ?: "" }
     private val formatter = SimpleDateFormat("dd MMMM yyyy '-' hh:mm:ss a", Locale.getDefault())
 
     private val launcher =
@@ -69,33 +69,33 @@ class UpdateFragment : Fragment() {
 
     }
 
-    private fun load(f: Friend) {
-        binding.txtId.text = f.id
-        binding.edtName.setText(f.name)
-        binding.edtAge.setText(f.age.toString())
+    private fun load(e: Exercise) {
+        binding.txtId.text = e.index
+        binding.edtName.setText(e.exercise)
+        binding.edtAge.setText(e.calories.toString())
 
         // TODO: Load photo and date
-        binding.imgPhoto.setImageBitmap(f.photo.toBitmap())
-        binding.txtDate.text = formatter.format(f.date)
+        binding.imgPhoto.setImageBitmap(e.photo.toBitmap())
+        binding.txtDate.text = formatter.format(e.date)
 
         binding.edtName.requestFocus()
     }
 
     private fun submit() {
         // TODO: Update (set)
-        val f = Friend(
-            id = id,
-            name = binding.edtName.text.toString().trim(),
-            age = binding.edtAge.text.toString().toIntOrNull() ?: 0,
+        val e = Exercise(
+            index = id,
+            exercise = binding.edtName.text.toString().trim(),
+            calories = binding.edtAge.text.toString().toIntOrNull() ?: 0,
             photo = binding.imgPhoto.cropToBlob(300, 300)
         )
 
-        val err = vm.validate(f, false)
+        val err = vm.validate(e, false)
         if (err != "") {
             errorDialog(err)
             return
         }
-        vm.set(f)
+        vm.set(e)
         nav.navigateUp()
     }
 

@@ -1,4 +1,4 @@
-package com.example.health_tracking.activityTracking
+package com.example.health_tracking.activityTracking.data
 
 import androidx.lifecycle.ViewModel
 

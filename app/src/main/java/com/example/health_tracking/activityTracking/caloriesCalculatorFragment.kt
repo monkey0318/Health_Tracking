@@ -1,39 +1,43 @@
 package com.example.health_tracking.activityTracking
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
+import androidx.fragment.app.Fragment
 import com.example.health_tracking.R
-import com.example.health_tracking.databinding.ActivitySaveBinding
+import com.example.health_tracking.activityTracking.data.saveActivityViewModel
+import com.example.health_tracking.databinding.FragmentCaloriesCalculatorBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
-class saveActivity : AppCompatActivity() {
+
+class caloriesCalculatorFragment : Fragment() {
 
     private val viewModel = saveActivityViewModel()
-    private lateinit var binding: ActivitySaveBinding
-
+    private lateinit var binding: FragmentCaloriesCalculatorBinding
 
     // Initialize Firestore
     val db = FirebaseFirestore.getInstance()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCaloriesCalculatorBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivitySaveBinding.inflate(layoutInflater)
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.activitySpinner.adapter = ArrayAdapter(
-            this,
+            requireContext(),
             android.R.layout.simple_spinner_item,
             resources.getStringArray(R.array.activity_array)
         )
 
         binding.submitButton.setOnClickListener { calculateCalories(it) }
-
     }
-
     fun calculateCalories(view: View) {
         val selectedActivity = binding.activitySpinner.selectedItem.toString()
         val duration = binding.durationEditText.text.toString().toFloatOrNull() ?: 0f
@@ -72,3 +76,6 @@ class saveActivity : AppCompatActivity() {
             }
     }
 }
+
+
+

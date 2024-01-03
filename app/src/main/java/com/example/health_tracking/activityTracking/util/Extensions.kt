@@ -1,4 +1,4 @@
-package com.example.health_tracking.util
+package com.example.health_tracking.activityTracking.util
 
 import android.app.AlertDialog
 import android.graphics.Bitmap
@@ -54,7 +54,6 @@ fun Bitmap.crop(width: Int, height: Int): Bitmap {
         .createBitmap(this, x, y, w, h) // Crop
         .scale(width, height) // Resize
 }
-
 
 // Usage: Convert from Bitmap to Blob
 @Suppress("DEPRECATION")

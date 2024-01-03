@@ -13,16 +13,16 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.health_tracking.ui.ListFragment"
-        android:label="Friend | List"
+        android:label="Calories | List"
         tools:layout="@layout/fragment_list" />
     <fragment
         android:id="@+id/insertFragment"
         android:name="com.example.health_tracking.ui.InsertFragment"
-        android:label="Friend | Insert"
+        android:label="Calories | Insert"
         tools:layout="@layout/fragment_insert" />
     <fragment
         android:id="@+id/updateFragment"
         android:name="com.example.health_tracking.ui.UpdateFragment"
-        android:label="Friend | Update"
+        android:label="Calories | Update"
         tools:layout="@layout/fragment_update" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.example.health_tracking
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
@@ -8,12 +9,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import com.example.health_tracking.databinding.ActivityDrawerSlideBinding
+import com.example.health_tracking.activityTracking.ActivityLayout
+import com.example.health_tracking.activityTracking.CalculateBMIFragment
+import com.example.health_tracking.activityTracking.RunningFragment
+import com.example.health_tracking.activityTracking.caloriesCalculatorFragment
 import com.example.health_tracking.nutritionTracking.NutritionFragment
 import com.example.health_tracking.profile.ProfileFragment
-
 import com.example.health_tracking.ui.dashboard.DashboardFragment
-import com.example.health_tracking.ui.notifications.NotificationsFragment
 import com.example.health_tracking.waterTracking.WaterTrackingFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -75,8 +77,6 @@ class DrawerActivity  : AppCompatActivity() {
         else{Toast.makeText(applicationContext, "Error:No user info", Toast.LENGTH_SHORT).show()}
 
 
-
-
         startFirstFragment(DashboardFragment())
         navView.setNavigationItemSelectedListener {
 
@@ -85,28 +85,31 @@ class DrawerActivity  : AppCompatActivity() {
 
                 R.id.home -> placeFragment(DashboardFragment(),it.title.toString())
                 R.id.profile -> placeFragment(ProfileFragment(),it.title.toString())
-               R.id.sleepTracking -> placeFragment(SleepTrackingFragment(),it.title.toString())
+                R.id.sleepTracking -> placeFragment(SleepTrackingFragment(),it.title.toString())
                 R.id.nutritionTracking -> placeFragment(NutritionFragment(),it.title.toString())
                 R.id.waterTracking -> placeFragment(WaterTrackingFragment(),it.title.toString())
-               // R.id.activityTracking -> placeFragment(DashboardFragment(),it.title.toString())
-              //  R.id.bmiCalculator -> placeFragment(DashboardFragment(),it.title.toString())
-              //  R.id.notification -> placeFragment(DashboardFragment(),it.title.toString())
-
-
+                R.id.activityTracking -> startActivity()//
+//              R.id.bmiCalculator -> calBMI()//
+                R.id.bmiCalculator -> placeFragment(CalculateBMIFragment(),it.title.toString())
+                R.id.runner -> placeFragment(RunningFragment(),it.title.toString())
+                R.id.calCalculator -> placeFragment(caloriesCalculatorFragment(),it.title.toString())
+//                R.id.logout -> placeFragment(caloriesCalculatorFragment(),it.title.toString())
             }
             true
         }
-
-
-
     }
-
+    private fun startActivity(){
+        val intent = Intent(this, ActivityLayout::class.java)
+        startActivity(intent)
+    }
+//    private fun calBMI(){
+//        val intent = Intent(this, CalculateBMI::class.java)
+//        startActivity(intent)
+//    }
     private fun startFirstFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer,fragment)
         transaction.commit()
-
-
     }
     private fun placeFragment(fragment: Fragment,title:String){
         val transaction = supportFragmentManager.beginTransaction()
@@ -121,5 +124,4 @@ class DrawerActivity  : AppCompatActivity() {
         }
         return true
     }
-
 }

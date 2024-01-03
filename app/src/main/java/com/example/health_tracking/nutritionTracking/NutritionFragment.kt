@@ -2,40 +2,19 @@ package com.example.health_tracking.nutritionTracking
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import com.example.health_tracking.R
-import com.example.health_tracking.databinding.ActivityNutritionTrackingBinding
+import androidx.fragment.app.Fragment
 import com.example.health_tracking.databinding.FragmentNutritionBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [NutritionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NutritionFragment : Fragment() {
     data class NutrientData(
         val protein: Double = 0.0,
         val carbs: Double = 0.0,
         val fats: Double = 0.0
     )
-//    private lateinit var proteinEditText: EditText
-//    private lateinit var carbsEditText: EditText
-//    private lateinit var fatsEditText: EditText
-//    private lateinit var totalCaloriesTextView: TextView
-
-    //    private lateinit var mAuth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
     private lateinit var binding: FragmentNutritionBinding
@@ -47,18 +26,8 @@ class NutritionFragment : Fragment() {
         binding = FragmentNutritionBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding = ActivityNutritionTrackingBinding.inflate(layoutInflater)
-//        setContentView(R.layout.fragment_nutrition)
-
-//        proteinEditText = findViewById(R.id.proteinEditText)
-//        carbsEditText = findViewById(R.id.carbsEditText)
-//        fatsEditText = findViewById(R.id.fatsEditText)
-//        totalCaloriesTextView = findViewById(R.id.totalCaloriesTextView)
-
-//        mAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
         binding.calculateButton.setOnClickListener {
@@ -73,7 +42,6 @@ class NutritionFragment : Fragment() {
             loadNutrientHistory(it)
         }
     }
-
     private fun calculateTotalCalories(view: View) {
         val protein = parseEditText(binding.proteinEditText)
         val carbs = parseEditText(binding.carbsEditText)

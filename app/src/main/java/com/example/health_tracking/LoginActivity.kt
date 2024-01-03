@@ -8,8 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.health_tracking.nutritionTracking.NutritionTrackingActivity
-import com.example.health_tracking.profile.ProfileActivity
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
@@ -43,17 +41,10 @@ class LoginActivity : AppCompatActivity() {
                     // Successfully found a matching user in Firestore
                     Toast.makeText(applicationContext, "Login Successfully", Toast.LENGTH_SHORT).show()
 
-
-
                     val context = view.context
                     val intent = Intent(context, DrawerActivity::class.java)
                     intent.putExtra("email", email)
                     startActivity(intent)
-
-
-
-
-
                 }
             }
             .addOnFailureListener { exception ->

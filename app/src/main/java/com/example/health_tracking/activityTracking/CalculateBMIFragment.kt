@@ -1,29 +1,30 @@
 package com.example.health_tracking.activityTracking
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
-import com.example.health_tracking.R
-import com.example.health_tracking.databinding.ActivityCalculateBmiBinding
-
-class CalculateBMI : AppCompatActivity() {
-
-    private lateinit var binding: ActivityCalculateBmiBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityCalculateBmiBinding.inflate(layoutInflater)
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.health_tracking.databinding.FragmentCalculateBMIBinding
 
 
-        binding.buttonCalculate.setOnClickListener { calculateBMI() }
+class CalculateBMIFragment : Fragment() {
+
+    private lateinit var binding: FragmentCalculateBMIBinding
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCalculateBMIBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonCalculate.setOnClickListener { calculateBMI() }
+
+    }
     private fun calculateBMI() {
         // Get user input
         val weight = binding.editTextWeight.text.toString().toFloatOrNull()
@@ -53,4 +54,7 @@ class CalculateBMI : AppCompatActivity() {
             binding.textViewResult.text = "Invalid input. Please enter valid weight and height."
         }
     }
+
 }
+
+
