@@ -12,6 +12,7 @@ import com.example.health_tracking.databinding.ActivityBinding
 import com.example.health_tracking.databinding.ActivityMainBinding
 import com.example.health_tracking.databinding.ActivityRunningBinding
 import com.example.health_tracking.databinding.ActivitySaveBinding
+import com.example.health_tracking.nutritionTracking.NutritionFragment
 import com.example.health_tracking.nutritionTracking.NutritionTrackingActivity
 import com.example.health_tracking.waterTracking.WaterTrackingActivity
 
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, WaterTrackingActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
