@@ -89,15 +89,26 @@ class DrawerActivity  : AppCompatActivity() {
                 R.id.nutritionTracking -> placeFragment(NutritionFragment(),it.title.toString())
                 R.id.waterTracking -> placeFragment(WaterTrackingFragment(),it.title.toString())
                 R.id.activityTracking -> startActivity()//
-//              R.id.bmiCalculator -> calBMI()//
                 R.id.bmiCalculator -> placeFragment(CalculateBMIFragment(),it.title.toString())
                 R.id.runner -> placeFragment(RunningFragment(),it.title.toString())
                 R.id.calCalculator -> placeFragment(caloriesCalculatorFragment(),it.title.toString())
-//                R.id.logout -> placeFragment(caloriesCalculatorFragment(),it.title.toString())
+                R.id.logout -> logOutActivity()
             }
             true
         }
     }
+
+    private fun logOutActivity() {
+        // Display a Toast indicating successful logout
+        Toast.makeText(this, "You have logged out successfully", Toast.LENGTH_SHORT).show()
+
+        // Navigate to the login screen or perform any other post-logout actions
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+
     private fun startActivity(){
         val intent = Intent(this, ActivityLayout::class.java)
         startActivity(intent)
