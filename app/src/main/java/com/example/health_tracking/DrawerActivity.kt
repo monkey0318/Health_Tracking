@@ -13,6 +13,7 @@ import com.example.health_tracking.nutritionTracking.NutritionFragment
 
 import com.example.health_tracking.ui.dashboard.DashboardFragment
 import com.example.health_tracking.ui.notifications.NotificationsFragment
+import com.example.health_tracking.waterTracking.WaterTrackingFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -85,7 +86,7 @@ class DrawerActivity  : AppCompatActivity() {
               //  R.id.profile -> placeFragment(DashboardFragment(),it.title.toString())
                R.id.sleepTracking -> placeFragment(SleepTrackingFragment(),it.title.toString())
                 R.id.nutritionTracking -> placeFragment(NutritionFragment(),it.title.toString())
-              //  R.id.waterTracking -> placeFragment(DashboardFragment(),it.title.toString())
+                R.id.waterTracking -> placeFragment(WaterTrackingFragment(),it.title.toString())
                // R.id.activityTracking -> placeFragment(DashboardFragment(),it.title.toString())
               //  R.id.bmiCalculator -> placeFragment(DashboardFragment(),it.title.toString())
               //  R.id.notification -> placeFragment(DashboardFragment(),it.title.toString())
