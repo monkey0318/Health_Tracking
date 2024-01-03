@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textViewMoodBeforeSleep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Mood Before Sleep" />
+
+    <RatingBar
+        android:id="@+id/ratingBarMoodBeforeSleep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewMoodBeforeSleep"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/textViewMoodAfterSleep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ratingBarMoodBeforeSleep"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Mood After Sleep" />
+
+    <RatingBar
+        android:id="@+id/ratingBarMoodAfterSleep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewMoodAfterSleep"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/textViewDisturbance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ratingBarMoodAfterSleep"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Disturbance" />
+
+    <RatingBar
+        android:id="@+id/ratingBarDisturbance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDisturbance"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+
+    <EditText
+        android:id="@+id/editTextComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ratingBarDisturbance"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="Comments"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:padding="5dp" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextComment"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/orange"
+        android:text="Submit"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
+
