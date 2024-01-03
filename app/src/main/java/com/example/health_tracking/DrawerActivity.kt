@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.health_tracking.databinding.ActivityDrawerSlideBinding
 import com.example.health_tracking.nutritionTracking.NutritionFragment
+import com.example.health_tracking.profile.ProfileFragment
 
 import com.example.health_tracking.ui.dashboard.DashboardFragment
 import com.example.health_tracking.ui.notifications.NotificationsFragment
@@ -83,7 +84,7 @@ class DrawerActivity  : AppCompatActivity() {
             when(it.itemId){
 
                 R.id.home -> placeFragment(DashboardFragment(),it.title.toString())
-              //  R.id.profile -> placeFragment(DashboardFragment(),it.title.toString())
+                R.id.profile -> placeFragment(ProfileFragment(),it.title.toString())
                R.id.sleepTracking -> placeFragment(SleepTrackingFragment(),it.title.toString())
                 R.id.nutritionTracking -> placeFragment(NutritionFragment(),it.title.toString())
                 R.id.waterTracking -> placeFragment(WaterTrackingFragment(),it.title.toString())
