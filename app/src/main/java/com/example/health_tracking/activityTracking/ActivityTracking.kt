@@ -7,7 +7,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.health_tracking.R
 import com.example.health_tracking.databinding.ActivityLayoutBinding
 
-class ActivityLayout : AppCompatActivity() {
+class ActivityTracking : AppCompatActivity() {
 
     private lateinit var binding: ActivityLayoutBinding
     private val nav by lazy { supportFragmentManager.findFragmentById(R.id.navHost)!!.findNavController() }

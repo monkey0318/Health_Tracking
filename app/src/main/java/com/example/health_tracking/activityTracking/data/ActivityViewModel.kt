@@ -6,7 +6,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 
-class testActivityViewModel : ViewModel() {
+class ActivityViewModel : ViewModel() {
     // TODO: Initialization
     private val col = Firebase.firestore.collection("Exercises")
     private val exercises = MutableLiveData<List<Exercise>>()

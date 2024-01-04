@@ -1,4 +1,4 @@
-package com.example.health_tracking.ui
+package com.example.health_tracking.activityTracking.activityUI
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.health_tracking.R
 import com.example.health_tracking.activityTracking.data.Exercise
-import com.example.health_tracking.activityTracking.data.testActivityViewModel
+import com.example.health_tracking.activityTracking.data.ActivityViewModel
 import com.example.health_tracking.databinding.FragmentListBinding
 import com.example.health_tracking.activityTracking.util.ActivityAdapter
 import com.google.firebase.firestore.ktx.firestore
@@ -22,7 +22,7 @@ class ListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
     private val nav by lazy { findNavController() }
-    private val vm: testActivityViewModel by activityViewModels ()
+    private val vm: ActivityViewModel by activityViewModels ()
 
     private lateinit var adapter: ActivityAdapter
 

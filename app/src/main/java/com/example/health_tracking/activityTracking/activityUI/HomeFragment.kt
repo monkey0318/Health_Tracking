@@ -1,4 +1,4 @@
-package com.example.health_tracking.ui
+package com.example.health_tracking.activityTracking.activityUI
 
 import android.os.Bundle
 import android.view.LayoutInflater

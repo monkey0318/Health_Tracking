@@ -2,7 +2,7 @@ package com.example.health_tracking.activityTracking.data
 
 import androidx.lifecycle.ViewModel
 
-class saveActivityViewModel : ViewModel() {
+class CaloriesCalculatorViewModel : ViewModel() {
 
     fun calculateCalories(activity: String, duration: Float): Int {
         val caloriesPerMinute = when (activity) {
