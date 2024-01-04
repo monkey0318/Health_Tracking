@@ -1,4 +1,4 @@
-package com.example.health_tracking.ui
+package com.example.health_tracking.activityTracking.activityUI
 
 import android.app.Activity
 import android.content.Intent
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.health_tracking.activityTracking.data.Exercise
-import com.example.health_tracking.activityTracking.data.testActivityViewModel
+import com.example.health_tracking.activityTracking.data.ActivityViewModel
 import com.example.health_tracking.activityTracking.util.cropToBlob
 import com.example.health_tracking.activityTracking.util.errorDialog
 import com.example.health_tracking.activityTracking.util.toBitmap
@@ -23,7 +23,7 @@ class UpdateFragment : Fragment() {
 
     private lateinit var binding: FragmentUpdateBinding
     private val nav by lazy { findNavController() }
-    private val vm: testActivityViewModel by activityViewModels ()
+    private val vm: ActivityViewModel by activityViewModels ()
 
     private val id by lazy { requireArguments().getString("index") ?: "" }
     private val formatter = SimpleDateFormat("dd MMMM yyyy '-' hh:mm:ss a", Locale.getDefault())

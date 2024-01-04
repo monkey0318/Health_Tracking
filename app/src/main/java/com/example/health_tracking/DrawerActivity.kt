@@ -9,10 +9,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import com.example.health_tracking.activityTracking.ActivityLayout
-import com.example.health_tracking.activityTracking.CalculateBMIFragment
-import com.example.health_tracking.activityTracking.RunningFragment
-import com.example.health_tracking.activityTracking.caloriesCalculatorFragment
+import com.example.health_tracking.activityTracking.ActivityTracking
+import com.example.health_tracking.activityTracking.activityUI.CalculateBMIFragment
+import com.example.health_tracking.activityTracking.activityUI.RunningFragment
+import com.example.health_tracking.activityTracking.activityUI.CaloriesCalculatorFragment
 import com.example.health_tracking.nutritionTracking.NutritionFragment
 import com.example.health_tracking.profile.ProfileFragment
 import com.example.health_tracking.ui.dashboard.DashboardFragment
@@ -91,7 +91,7 @@ class DrawerActivity  : AppCompatActivity() {
                 R.id.activityTracking -> startActivity()//
                 R.id.bmiCalculator -> placeFragment(CalculateBMIFragment(),it.title.toString())
                 R.id.runner -> placeFragment(RunningFragment(),it.title.toString())
-                R.id.calCalculator -> placeFragment(caloriesCalculatorFragment(),it.title.toString())
+                R.id.calCalculator -> placeFragment(CaloriesCalculatorFragment(),it.title.toString())
                 R.id.logout -> logOutActivity()
             }
             true
@@ -110,7 +110,7 @@ class DrawerActivity  : AppCompatActivity() {
     }
 
     private fun startActivity(){
-        val intent = Intent(this, ActivityLayout::class.java)
+        val intent = Intent(this, ActivityTracking::class.java)
         startActivity(intent)
     }
 //    private fun calBMI(){
