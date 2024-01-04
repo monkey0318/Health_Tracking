@@ -1,27 +1,20 @@
 package com.example.health_tracking
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.util.Patterns
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.health_tracking.databinding.ActivityMainBinding
 import com.example.health_tracking.databinding.ActivityRegisterBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.firestore
+
+//import com.example.health_tracking.AppDatabase
 
 class RegisterActivity: AppCompatActivity() {
 
@@ -32,11 +25,18 @@ class RegisterActivity: AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
     private lateinit var binding: ActivityRegisterBinding
+//    private lateinit var localDb: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        localDb = Room.databaseBuilder(
+//            applicationContext,
+//           AppDatabase::class.java, "app_database"
+//        ).fallbackToDestructiveMigration().build()
+
 
         val db = Firebase.firestore
 
@@ -57,44 +57,76 @@ class RegisterActivity: AppCompatActivity() {
 
     }
 
-    private fun checkEmpty(view: View){
+    private fun checkEmpty(view: View) {
         val name = binding.editNameText.text.toString()
         val email = binding.editEmailText.text.toString()
         val password = binding.editPasswordText.text.toString()
 
         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-            // Store data
-            val user = hashMapOf(
-                "name" to name,
-                "email" to email,
-                "password" to password
-            )
+
+            if (isValidEmail(email)) {
+
+                if (isValidPassword(password)) {
+
+                    if (isValidName(name)) {
+                        // Store data
+                        val user = hashMapOf(
+                            "name" to name,
+                            "email" to email,
+                            "password" to password
+                        )
+
+                        val db = FirebaseFirestore.getInstance()
 
 
-            val db = FirebaseFirestore.getInstance()
+                        db.collection("users")
+                            .add(user)
+                            .addOnSuccessListener { documentReference ->
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Register Successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+//                                val localUsers = Users(name = name, email = email, password = password)
+//                                localDb.userDao().insertUsers(localUsers)
+                                loginAccount(view)
 
-            // Add a new document to the "users" collection with auto-generated ID
-            db.collection("users")
-                .add(user)
-                .addOnSuccessListener { documentReference ->
-
-                    Toast.makeText(applicationContext, "Register Successfully", Toast.LENGTH_SHORT).show()
-                    loginAccount(view)
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(applicationContext, "Something went wrong!!", Toast.LENGTH_SHORT).show()
+                            }
+                    } else {
+                        Toast.makeText(this, "Invalid name format", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "Invalid password format (minimum 8 characters)", Toast.LENGTH_SHORT).show()
                 }
-                .addOnFailureListener { e ->
-                    Toast.makeText(applicationContext, "Something went wrong!!", Toast.LENGTH_SHORT).show()
-
-
-                }
-
+            } else {
+                Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
+            }
         } else {
-            Toast.makeText(this, "Do not leave empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun isValidEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        return password.length >= 8
+    }
+
+    private fun isValidName(name: String): Boolean {
+
+        return name.isNotEmpty()
+    }
+
 
     private fun loginAccount(view: View) {
         val context = view.context
         val intent = Intent(context, LoginActivity::class.java)
         context.startActivity(intent)
     }
+
 }
