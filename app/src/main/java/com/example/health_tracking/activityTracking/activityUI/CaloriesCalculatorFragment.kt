@@ -10,7 +10,6 @@ import com.example.health_tracking.R
 import com.example.health_tracking.activityTracking.data.CaloriesCalculatorViewModel
 import com.example.health_tracking.databinding.FragmentCaloriesCalculatorBinding
 
-
 class CaloriesCalculatorFragment : Fragment() {
 
     private val viewModel = CaloriesCalculatorViewModel()
