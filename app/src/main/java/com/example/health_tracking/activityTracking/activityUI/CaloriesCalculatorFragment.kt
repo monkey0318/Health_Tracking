@@ -1,14 +1,17 @@
 package com.example.health_tracking.activityTracking.activityUI
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.example.health_tracking.R
 import com.example.health_tracking.activityTracking.data.CaloriesCalculatorViewModel
 import com.example.health_tracking.databinding.FragmentCaloriesCalculatorBinding
+
 
 class CaloriesCalculatorFragment : Fragment() {
 
@@ -47,9 +50,17 @@ class CaloriesCalculatorFragment : Fragment() {
             binding.caloriesResult.text = "Please enter duration!!"
             binding.caloriesResult.error = "Invalid duration. Please enter a valid duration."
         }
+        // Hide the keyboard
+        hideKeyboard(view?.context, view)
     }
 
+
+private fun hideKeyboard(context: Context?, view: View?) {
+    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
 }
+
 
 
 
