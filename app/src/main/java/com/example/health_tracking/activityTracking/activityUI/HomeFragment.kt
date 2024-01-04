@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
     //Use this when u want to update all fields
     private fun set() {
         // TODO
-        val e = Exercise("2", "SampleExercise", 200)
+        val e = Exercise("1", "SampleExercise", 200)
 
         Firebase.firestore
             .collection("Exercises")
@@ -80,7 +80,7 @@ class HomeFragment : Fragment() {
         // TODO
         Firebase.firestore
             .collection("Exercises")
-            .document("2")
+            .document("1")
             .update("calories",3000)
             .addOnSuccessListener {
                 toast("Record updated!")
