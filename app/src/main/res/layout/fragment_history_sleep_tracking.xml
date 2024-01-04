@@ -11,6 +11,12 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_margin="40dp"
         android:scrollbars="vertical"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:text="Back" />
 </FrameLayout>
