@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.health_tracking.R
-import com.example.health_tracking.databinding.ActivityWaterTrackingBinding
 import com.example.health_tracking.databinding.FragmentNutritionBinding
 import com.example.health_tracking.databinding.FragmentWaterTrackingBinding
 import com.google.firebase.firestore.FirebaseFirestore

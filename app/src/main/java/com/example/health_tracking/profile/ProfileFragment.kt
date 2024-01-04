@@ -22,13 +22,13 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfileFragment : Fragment() {
-    data class User(
-        val name: String,
-        val email: String,
-        val password: String
-    ){
-        constructor() : this("", "", "")
-    }
+//    data class User(
+//        val name: String,
+//        val email: String,
+//        val password: String
+//    ){
+//        constructor() : this("", "", "")
+//    }
 
     private lateinit var db : FirebaseFirestore
     private lateinit var binding: FragmentProfileBinding
