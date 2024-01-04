@@ -10,11 +10,18 @@
         android:title="Profile"
         android:icon="@drawable/baseline_person_24"
         android:id="@+id/profile"/>
+    <group>
     <item
         android:title="Sleep Tracking"
         android:id="@+id/sleepTracking"
         android:icon="@drawable/baseline_monitor_heart_24"
          />
+    <item
+        android:id="@+id/sleepTrackingHistory"
+        android:icon="@drawable/baseline_bedtime_24"
+
+        android:title="Sleep Tracking History" />
+    </group>
     <item
         android:id="@+id/nutritionTracking"
         android:icon="@drawable/baseline_dinner_dining_24"

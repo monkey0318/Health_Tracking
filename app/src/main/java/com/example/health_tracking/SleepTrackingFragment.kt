@@ -1,21 +1,16 @@
 package com.example.health_tracking
 
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
-
+import androidx.lifecycle.ViewModelProvider
 import java.util.concurrent.TimeUnit
 
 
@@ -31,8 +26,11 @@ class SleepTrackingFragment : Fragment() {
     private lateinit var btnStop: ImageButton
 
 
+
+
     private var startTimeMillis: Long = 0
     private var isTimerRunning = false
+
 
 
     override fun onCreateView(
@@ -46,6 +44,7 @@ class SleepTrackingFragment : Fragment() {
         btnPause = view.findViewById(R.id.btnPause)
         btnStop = view.findViewById(R.id.btnStop)
         btnReset = view.findViewById(R.id.btnReset)
+
 
         btnStart.setOnClickListener {
             if (!isTimerRunning) {
@@ -82,11 +81,12 @@ class SleepTrackingFragment : Fragment() {
             btnStart.visibility = View.VISIBLE
 
         }
-        btnStop.setOnClickListener{
-
-
+        btnStop.setOnClickListener {
             textViewTime.removeCallbacks(updateTimeRunnable)
             isTimerRunning = false
+
+            btnPause.visibility = View.GONE
+            btnStart.visibility = View.VISIBLE
 
             val elapsedTimeMillis = System.currentTimeMillis() - startTimeMillis
             val hours = TimeUnit.MILLISECONDS.toHours(elapsedTimeMillis)
@@ -95,25 +95,23 @@ class SleepTrackingFragment : Fragment() {
 
             val timeMillis = String.format("%02d:%02d:%02d", hours, minutes, seconds)
 
+            val sleepMoodFragment = SleepMoodFragment()
 
-            val ratingSleepTime = calculateSleepTimeRating(hours).toFloat()
-
-
-            viewModel.saveTimeToFirestore(timeMillis, ratingSleepTime)
+            // Pass required information to SleepMoodFragment using arguments
+            val bundle = Bundle()
+            bundle.putString("timeMillis", timeMillis)
+            bundle.putFloat("ratingSleepTime", calculateSleepTimeRating(hours).toFloat())
+            sleepMoodFragment.arguments = bundle
 
             startTimeMillis = System.currentTimeMillis()
             updateTime()
-
-            btnPause.visibility = View.GONE
-            btnStart.visibility = View.VISIBLE
-
-
-            val sleepMoodFragment = SleepMoodFragment()
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainer, sleepMoodFragment)
             transaction.commit()
         }
+
+
 
 
         return view
@@ -167,13 +165,7 @@ class SleepTrackingFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(SleepTrackingViewModel::class.java)
 
 
-        viewModel.saveSuccess.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireContext(), "Saved Record", Toast.LENGTH_SHORT).show()
-        })
 
-        viewModel.saveFailure.observe(viewLifecycleOwner, Observer { errorMessage ->
-            Toast.makeText(requireContext(), "Error: $errorMessage", Toast.LENGTH_SHORT).show()
-        })
     }
 
 }

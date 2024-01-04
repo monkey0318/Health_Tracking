@@ -86,6 +86,7 @@ class DrawerActivity  : AppCompatActivity() {
                 R.id.home -> placeFragment(DashboardFragment(),it.title.toString())
                 R.id.profile -> placeFragment(ProfileFragment(),it.title.toString())
                 R.id.sleepTracking -> placeFragment(SleepTrackingFragment(),it.title.toString())
+                R.id.sleepTrackingHistory -> placeFragment(HistorySleepTrackingFragment(),it.title.toString())
                 R.id.nutritionTracking -> placeFragment(NutritionFragment(),it.title.toString())
                 R.id.waterTracking -> placeFragment(WaterTrackingFragment(),it.title.toString())
                 R.id.activityTracking -> startActivity()//

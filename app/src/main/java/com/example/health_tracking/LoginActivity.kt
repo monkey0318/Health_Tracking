@@ -2,6 +2,7 @@ package com.example.health_tracking
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -29,14 +30,24 @@ class LoginActivity : AppCompatActivity() {
         registerTextView.setOnClickListener { registerAccount(it) }
     }
 
-    private fun loginCheckSuccess(view: View,email: String, password: String) {
+    private fun loginCheckSuccess(view: View, email: String, password: String) {
+        if (!isValidEmail(email)) {
+            Toast.makeText(this, "Invalid Email Format", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (password.length < 8) {
+            Toast.makeText(this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         db.collection("users")
             .whereEqualTo("email", email)
             .whereEqualTo("password", password)
             .get()
             .addOnSuccessListener { result ->
                 if (result.isEmpty) {
-                    Toast.makeText(this, "Email or Password incorrect", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please fills in the blanks", Toast.LENGTH_SHORT).show()
                 } else {
                     // Successfully found a matching user in Firestore
                     Toast.makeText(applicationContext, "Login Successfully", Toast.LENGTH_SHORT).show()
@@ -49,8 +60,11 @@ class LoginActivity : AppCompatActivity() {
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(applicationContext, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()
-
             }
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
 
