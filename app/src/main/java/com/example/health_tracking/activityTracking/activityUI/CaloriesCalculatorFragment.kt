@@ -1,24 +1,23 @@
-package com.example.health_tracking.activityTracking
+package com.example.health_tracking.activityTracking.activityUI
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.example.health_tracking.R
-import com.example.health_tracking.activityTracking.data.saveActivityViewModel
+import com.example.health_tracking.activityTracking.data.CaloriesCalculatorViewModel
 import com.example.health_tracking.databinding.FragmentCaloriesCalculatorBinding
-import com.google.firebase.firestore.FirebaseFirestore
 
 
-class caloriesCalculatorFragment : Fragment() {
+class CaloriesCalculatorFragment : Fragment() {
 
-    private val viewModel = saveActivityViewModel()
+    private val viewModel = CaloriesCalculatorViewModel()
     private lateinit var binding: FragmentCaloriesCalculatorBinding
 
-    // Initialize Firestore
-    val db = FirebaseFirestore.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,35 +46,21 @@ class caloriesCalculatorFragment : Fragment() {
             binding.caloriesResult.text = "Calories burnt: $caloriesBurnt kcal"
             binding.caloriesResult.error = null // Clear any previous error
 
-            // Save data to Firestore
-            saveDataToFirestore(selectedActivity, duration, caloriesBurnt.toFloat())
         } else {
             binding.caloriesResult.text = "Please enter duration!!"
             binding.caloriesResult.error = "Invalid duration. Please enter a valid duration."
         }
+        // Hide the keyboard
+        hideKeyboard(view?.context, view)
     }
 
-    private fun saveDataToFirestore(activity: String, duration: Float, caloriesBurnt: Float) {
-        // Create a Map to represent the data
-        val data = hashMapOf(
-            "activity" to activity,
-            "duration" to duration,
-            "caloriesBurnt" to caloriesBurnt
-        )
 
-        // Add a new document with a generated ID
-        db.collection("exercises") // Replace with your Firestore collection name
-            .add(data)
-            .addOnSuccessListener { documentReference ->
-                // Document added successfully
-                println("DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                // Error adding document
-                println("Error adding document: $e")
-            }
+private fun hideKeyboard(context: Context?, view: View?) {
+    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }
+
 
 
 

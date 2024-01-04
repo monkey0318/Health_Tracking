@@ -1,4 +1,4 @@
-package com.example.health_tracking.activityTracking
+package com.example.health_tracking.activityTracking.activityUI
 
 import android.os.Bundle
 import android.os.Handler
@@ -59,9 +59,15 @@ class RunningFragment : Fragment() {
     private fun updateUI() {
         // Display the captured times and calculate the time difference
         val startTimeText = "Start Time: ${formatTime(startTimeMillis)}"
-        val endTimeText = "End Time: ${formatTime(endTimeMillis)}"
 
-        binding.timeText.text = "$startTimeText\n$endTimeText"
+        // Reset endTimeMillis and endTimeText to 00:00:00 when the user clicks the button again
+        if (isRunning) {
+            val endTimeText = "End Time: ${formatTime(endTimeMillis)}"
+            binding.timeText.text = "$startTimeText\n$endTimeText"
+        } else {
+            endTimeMillis = 0L
+            binding.timeText.text = startTimeText
+        }
 
         if (startTimeMillis != 0L && endTimeMillis != 0L) {
             val durationMinutes = calculateTimeDifferenceMinutes(startTimeMillis, endTimeMillis)
@@ -69,7 +75,7 @@ class RunningFragment : Fragment() {
             val caloriesBurnt = calculateCaloriesBurnt(durationMinutes)
 
             binding.caloriesText.text = "Calories Burnt: $caloriesBurnt calories"
-            binding.durationText.text = "You have exercise: $duration"
+            binding.durationText.text = "You have exercised: $duration"
         }
     }
     private fun formatTime(timeMillis: Long): String {

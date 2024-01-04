@@ -34,25 +34,23 @@
 
         android:title="Water Tracking" />
     <item
-        android:id="@+id/activityTracking"
-        android:icon="@drawable/baseline_directions_run_24"
-
-        android:title="Activity Tracking" />
-    <item
         android:id="@+id/bmiCalculator"
         android:icon="@drawable/baseline_monitor_weight_24"
 
         android:title="Bmi Calculator" />
     <item
-        android:title="Runner"
         android:id="@+id/runner"
-        android:icon="@drawable/running"
-        />
+        android:icon="@drawable/baseline_directions_run_24"
+        android:title="Runner" />
     <item
-        android:title="CaloriesCalculator"
         android:id="@+id/calCalculator"
         android:icon="@drawable/baseline_calculate_24"
-        />
+        android:title="CaloriesCalculator" />
+    <item
+        android:id="@+id/activityTracking"
+        android:icon="@drawable/baseline_save_as_24"
+
+        android:title="Activity Tracker" />
     <item
         android:title="LogOut"
         android:id="@+id/logout"

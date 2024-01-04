@@ -4,39 +4,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.health_tracking.R
 import com.example.health_tracking.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private lateinit var textTitle: TextView
+    private lateinit var newsListView: ListView
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        textTitle = view.findViewById(R.id.textTitle)
+        newsListView = view.findViewById(R.id.newsListView)
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        textTitle.text = "Health Tracking News"
+
+        val newsData = arrayOf(
+            "Article 1: Important Health Update",
+            "Article 2: New Fitness Trends",
+            "Article 3: Healthy Eating Habits",
+            // Add more dummy news articles as needed
+        )
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, newsData)
+        newsListView.adapter = adapter
+
+
+        return view
     }
 }

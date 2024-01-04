@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.health_tracking.ui.HomeFragment"
+        android:name="com.example.health_tracking.activityTracking.activityUI.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.health_tracking.ui.ListFragment"
+        android:name="com.example.health_tracking.activityTracking.activityUI.ListFragment"
         android:label="Calories | List"
         tools:layout="@layout/fragment_list" />
     <fragment
         android:id="@+id/insertFragment"
-        android:name="com.example.health_tracking.ui.InsertFragment"
+        android:name="com.example.health_tracking.activityTracking.activityUI.InsertFragment"
         android:label="Calories | Insert"
         tools:layout="@layout/fragment_insert" />
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.example.health_tracking.ui.UpdateFragment"
+        android:name="com.example.health_tracking.activityTracking.activityUI.UpdateFragment"
         android:label="Calories | Update"
         tools:layout="@layout/fragment_update" />
 </navigation>

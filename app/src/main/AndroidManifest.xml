@@ -17,7 +17,7 @@
 
 
         <activity
-            android:name=".activityTracking.ActivityLayout"
+            android:name=".activityTracking.ActivityTracking"
             android:exported="false" />
         <activity
             android:name=".activityTracking.activity_tracking_main"
